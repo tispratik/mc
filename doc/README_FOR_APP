@@ -1,2 +1,7 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+MC = Viridian Mosaic
+ruby script/generate dry_scaffold Organization name:string owner_user_id:integer industry:string specific_industry:string
+ruby script/generate dry_scaffold Access organization_id:integer user_id:integer role:string reports_to_user_id:integer ext_organization_id:integer
+ruby script/generate dry_scaffold Mcontact email:string country_id:string state:string city:string street1:string street2:string zip:string telnum1:string telnum1_type:integer telnum2:string telnum2_type:integer webpage1:string webpage1_type:integer webpage2:string webpage2_type:integer short_description:string
+ruby script/generate dry_scaffold Msocial application:string application_login:string atoken:string asecret:string
+ruby script/generate dry_scaffold Team name:string organization_id:integer owner_user_id:integer
+ruby script/generate dry_scaffold TeamUser team_id:integer user_id:integer

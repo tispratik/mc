@@ -1,0 +1,12 @@
+- content_tag_for(:tr, access, :class => cycle(:odd, :even)) do
+  %td.organization_id= h access.try(:organization_id)
+  %td.user_id= h access.try(:user_id)
+  %td.role= h access.try(:role)
+  %td.reports_to_user_id= h access.try(:reports_to_user_id)
+  %td.ext_organization_id= h access.try(:ext_organization_id)
+  %td.actions
+    = link_to 'Show', access_path(access)
+    |
+    = link_to 'Edit', edit_access_path(access)
+    |
+    = link_to 'Destroy', access, :confirm => 'Are you sure?', :method => :delete

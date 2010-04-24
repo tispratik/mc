@@ -1,0 +1,18 @@
+%h1.heading
+  = "Teams"
+  
+%p.actions
+  = link_to 'New Team', new_team_path
+  
+%table
+  %thead.header
+    %tr
+      %th.name= 'Name'
+      %th.organization_id= 'Organization'
+      %th.owner_user_id= 'Owner user'
+      %th.actions= 'Actions'
+  %tbody.items.teams
+    - @teams.each do |team|
+      = render 'item', :team => team
+      
+= will_paginate(@teams)

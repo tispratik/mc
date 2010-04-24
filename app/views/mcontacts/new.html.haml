@@ -1,0 +1,10 @@
+%h1.heading
+  = 'New Mcontact'
+  
+- semantic_form_for(@mcontact) do |form|
+  = render 'form', :form => form
+  - form.buttons do
+    = form.commit_button 'Create'
+    
+%p.actions
+  = link_to 'Cancel', mcontacts_path

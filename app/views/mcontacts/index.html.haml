@@ -1,0 +1,31 @@
+%h1.heading
+  = "Mcontacts"
+  
+%p.actions
+  = link_to 'New Mcontact', new_mcontact_path
+  
+%table
+  %thead.header
+    %tr
+      %th.email= 'Email'
+      %th.country_id= 'Country'
+      %th.state= 'State'
+      %th.city= 'City'
+      %th.street1= 'Street1'
+      %th.street2= 'Street2'
+      %th.zip= 'Zip'
+      %th.telnum1= 'Telnum1'
+      %th.telnum1_type= 'Telnum1 type'
+      %th.telnum2= 'Telnum2'
+      %th.telnum2_type= 'Telnum2 type'
+      %th.webpage1= 'Webpage1'
+      %th.webpage1_type= 'Webpage1 type'
+      %th.webpage2= 'Webpage2'
+      %th.webpage2_type= 'Webpage2 type'
+      %th.short_description= 'Short description'
+      %th.actions= 'Actions'
+  %tbody.items.mcontacts
+    - @mcontacts.each do |mcontact|
+      = render 'item', :mcontact => mcontact
+      
+= will_paginate(@mcontacts)

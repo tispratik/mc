@@ -1,0 +1,41 @@
+%h1.heading
+  = "Mcontact %s" % @mcontact.id
+  
+- content_tag_for(:dl, @mcontact) do
+  %dt.label= 'Email'
+  %dd.email= h @mcontact.try(:email)
+  %dt.label= 'Country'
+  %dd.country_id= h @mcontact.try(:country_id)
+  %dt.label= 'State'
+  %dd.state= h @mcontact.try(:state)
+  %dt.label= 'City'
+  %dd.city= h @mcontact.try(:city)
+  %dt.label= 'Street1'
+  %dd.street1= h @mcontact.try(:street1)
+  %dt.label= 'Street2'
+  %dd.street2= h @mcontact.try(:street2)
+  %dt.label= 'Zip'
+  %dd.zip= h @mcontact.try(:zip)
+  %dt.label= 'Telnum1'
+  %dd.telnum1= h @mcontact.try(:telnum1)
+  %dt.label= 'Telnum1 type'
+  %dd.telnum1_type= h @mcontact.try(:telnum1_type)
+  %dt.label= 'Telnum2'
+  %dd.telnum2= h @mcontact.try(:telnum2)
+  %dt.label= 'Telnum2 type'
+  %dd.telnum2_type= h @mcontact.try(:telnum2_type)
+  %dt.label= 'Webpage1'
+  %dd.webpage1= h @mcontact.try(:webpage1)
+  %dt.label= 'Webpage1 type'
+  %dd.webpage1_type= h @mcontact.try(:webpage1_type)
+  %dt.label= 'Webpage2'
+  %dd.webpage2= h @mcontact.try(:webpage2)
+  %dt.label= 'Webpage2 type'
+  %dd.webpage2_type= h @mcontact.try(:webpage2_type)
+  %dt.label= 'Short description'
+  %dd.short_description= h @mcontact.try(:short_description)
+  
+%p.actions
+  = link_to 'Edit', edit_mcontact_path(@mcontact)
+  |
+  = link_to 'Index', mcontacts_path
