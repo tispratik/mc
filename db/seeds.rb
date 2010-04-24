@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#   
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
+require File.expand_path(File.dirname(__FILE__) + '/blueprints')
+
+[Mcontact, Organization, Access, Msocial, Team, TeamUser].each(&:delete_all)
+
+all_users = User.all
+
+p "Making Organizations"
+10.times do
+  u = Organization.make(:contact => Mcontact.make, :owner => all_users.rand)
+  5.times do
+    random_user = all_users.rand
+    t = Team.make(:organization => u, :owner => random_user)
+    TeamUser.make(:user => random_user, :organization => u)
+    
+    10.times do
+      TeamUser.make(:user => all_users.rand, :organization => u)
+    end
+  end
+end
