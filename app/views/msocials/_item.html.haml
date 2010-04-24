@@ -1,0 +1,11 @@
+- content_tag_for(:tr, msocial, :class => cycle(:odd, :even)) do
+  %td.application= h msocial.try(:application)
+  %td.application_login= h msocial.try(:application_login)
+  %td.atoken= h msocial.try(:atoken)
+  %td.asecret= h msocial.try(:asecret)
+  %td.actions
+    = link_to 'Show', msocial_path(msocial)
+    |
+    = link_to 'Edit', edit_msocial_path(msocial)
+    |
+    = link_to 'Destroy', msocial, :confirm => 'Are you sure?', :method => :delete

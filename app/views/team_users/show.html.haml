@@ -1,0 +1,13 @@
+%h1.heading
+  = "Team user %s" % @team_user.id
+  
+- content_tag_for(:dl, @team_user) do
+  %dt.label= 'Team'
+  %dd.team_id= h @team_user.try(:team_id)
+  %dt.label= 'User'
+  %dd.user_id= h @team_user.try(:user_id)
+  
+%p.actions
+  = link_to 'Edit', edit_team_user_path(@team_user)
+  |
+  = link_to 'Index', team_users_path

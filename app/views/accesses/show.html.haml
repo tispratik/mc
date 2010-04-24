@@ -1,0 +1,19 @@
+%h1.heading
+  = "Access %s" % @access.id
+  
+- content_tag_for(:dl, @access) do
+  %dt.label= 'Organization'
+  %dd.organization_id= h @access.try(:organization_id)
+  %dt.label= 'User'
+  %dd.user_id= h @access.try(:user_id)
+  %dt.label= 'Role'
+  %dd.role= h @access.try(:role)
+  %dt.label= 'Reports to user'
+  %dd.reports_to_user_id= h @access.try(:reports_to_user_id)
+  %dt.label= 'Ext organization'
+  %dd.ext_organization_id= h @access.try(:ext_organization_id)
+  
+%p.actions
+  = link_to 'Edit', edit_access_path(@access)
+  |
+  = link_to 'Index', accesses_path

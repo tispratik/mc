@@ -1,0 +1,17 @@
+%h1.heading
+  = "Msocial %s" % @msocial.id
+  
+- content_tag_for(:dl, @msocial) do
+  %dt.label= 'Application'
+  %dd.application= h @msocial.try(:application)
+  %dt.label= 'Application login'
+  %dd.application_login= h @msocial.try(:application_login)
+  %dt.label= 'Atoken'
+  %dd.atoken= h @msocial.try(:atoken)
+  %dt.label= 'Asecret'
+  %dd.asecret= h @msocial.try(:asecret)
+  
+%p.actions
+  = link_to 'Edit', edit_msocial_path(@msocial)
+  |
+  = link_to 'Index', msocials_path

@@ -1,0 +1,10 @@
+%h1.heading
+  = 'New Team user'
+  
+- semantic_form_for(@team_user) do |form|
+  = render 'form', :form => form
+  - form.buttons do
+    = form.commit_button 'Create'
+    
+%p.actions
+  = link_to 'Cancel', team_users_path

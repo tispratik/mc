@@ -1,0 +1,19 @@
+%h1.heading
+  = "Msocials"
+  
+%p.actions
+  = link_to 'New Msocial', new_msocial_path
+  
+%table
+  %thead.header
+    %tr
+      %th.application= 'Application'
+      %th.application_login= 'Application login'
+      %th.atoken= 'Atoken'
+      %th.asecret= 'Asecret'
+      %th.actions= 'Actions'
+  %tbody.items.msocials
+    - @msocials.each do |msocial|
+      = render 'item', :msocial => msocial
+      
+= will_paginate(@msocials)

@@ -1,0 +1,20 @@
+%h1.heading
+  = "Accesses"
+  
+%p.actions
+  = link_to 'New Access', new_access_path
+  
+%table
+  %thead.header
+    %tr
+      %th.organization_id= 'Organization'
+      %th.user_id= 'User'
+      %th.role= 'Role'
+      %th.reports_to_user_id= 'Reports to user'
+      %th.ext_organization_id= 'Ext organization'
+      %th.actions= 'Actions'
+  %tbody.items.accesses
+    - @accesses.each do |access|
+      = render 'item', :access => access
+      
+= will_paginate(@accesses)

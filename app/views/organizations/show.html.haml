@@ -1,0 +1,17 @@
+%h1.heading
+  = "Organization %s" % @organization.id
+  
+- content_tag_for(:dl, @organization) do
+  %dt.label= 'Name'
+  %dd.name= h @organization.try(:name)
+  %dt.label= 'Owner user'
+  %dd.owner_user_id= h @organization.try(:owner_user_id)
+  %dt.label= 'Industry'
+  %dd.industry= h @organization.try(:industry)
+  %dt.label= 'Specific industry'
+  %dd.specific_industry= h @organization.try(:specific_industry)
+  
+%p.actions
+  = link_to 'Edit', edit_organization_path(@organization)
+  |
+  = link_to 'Index', organizations_path
