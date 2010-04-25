@@ -4,11 +4,6 @@ class User < ActiveRecord::Base
   
   has_one :usr
   has_one :ucontact
-  has_one :usocial
-  has_one :uprofile
-  has_many :interests
-  has_many :educations
-  has_many :workpositions
   
   acts_as_authentic do |a|
     a.logged_in_timeout = 100.minutes # default is 10.minutes

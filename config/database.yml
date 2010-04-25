@@ -3,7 +3,7 @@ development:
   encoding: utf8
   collation: utf8_general_ci  
   reconnect: false
-  database: MC_development
+  database: mc_development
   pool: 5
   username: root
   password:
@@ -14,7 +14,7 @@ production:
   encoding: utf8
   collation: utf8_general_ci  
   reconnect: false
-  database: MC_production
+  database: mc_production
   pool: 5
   username: root
   password:
@@ -25,12 +25,23 @@ va:
   encoding: utf8
   collation: utf8_general_ci
   reconnect: false
-  database: VA_development
+  database: op_development
   pool: 5
   username: root
   password:
   host: localhost
-  
+
+op:
+  adapter: mysql
+  encoding: utf8
+  collation: utf8_general_ci
+  reconnect: false
+  database: op_development
+  pool: 5
+  username: root
+  password:
+  host: localhost
+    
 ref_area:
   adapter: mysql
   encoding: utf8
