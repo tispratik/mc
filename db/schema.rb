@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20100424215138) do
     t.string   "webpage2"
     t.integer  "webpage2_type"
     t.string   "short_description"
+    t.boolean  "is_email_verified"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

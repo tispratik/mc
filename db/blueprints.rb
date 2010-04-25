@@ -1,7 +1,7 @@
 require 'machinist/active_record'
 require 'random_data'
 require 'faker'
-require 'sham'
+require 'populator'
 require 'time_extensions'
 
 countries = Country.all.map(&:ison)
@@ -21,19 +21,13 @@ Mcontact.blueprint do
   telnum2       { Random.international_phone }
   telnum1_type  { a_phone_type.rand }
   telnum2_type  { a_phone_type.rand }
-  is_telnum1_public { Random.boolean }
-  is_telnum2_public { Random.boolean }
   email          { Random.email }
+  is_email_verified   { Random.boolean }
   webpage1       { 'http://' + Faker::Internet.domain_name }
   webpage2       { 'http://' + Faker::Internet.domain_name }
-  webpage3       { 'http://' + Faker::Internet.domain_name }
-  webpage1_type  { a_personal_web_page_type.rand }
-  webpage2_type  { a_personal_web_page_type.rand }
-  webpage3_type  { a_personal_web_page_type.rand }
-  short_bio      { Populator.words(10..50) }
-  time_zone      { Time.random.zone }
-  is_address_public   { Random.boolean }
-  is_email_verified   { Random.boolean }
+  webpage1_type  { a_web_page_type.rand }
+  webpage2_type  { a_web_page_type.rand }
+  short_description     { Populator.words(10..50) }
 end
 
 Organization.blueprint do
@@ -55,4 +49,7 @@ end
 
 Team.blueprint do
   name { Faker::Company.name }
+end
+
+TeamUser.blueprint do
 end

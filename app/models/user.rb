@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   
   has_one :usr
   has_one :ucontact
+  has_many :teams
   
   acts_as_authentic do |a|
     a.logged_in_timeout = 100.minutes # default is 10.minutes

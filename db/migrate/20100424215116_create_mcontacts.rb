@@ -17,7 +17,7 @@ class CreateMcontacts < ActiveRecord::Migration
       t.string :webpage2
       t.integer :webpage2_type
       t.string :short_description
-      
+      t.boolean :is_email_verified
       t.timestamps
     end
   end

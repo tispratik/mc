@@ -6,14 +6,14 @@ all_users = User.all
 
 p "Making Organizations"
 10.times do
-  u = Organization.make(:contact => Mcontact.make, :owner => all_users.rand)
+  u = Organization.make(:mcontact => Mcontact.make, :owner => all_users.rand)
   5.times do
     random_user = all_users.rand
     t = Team.make(:organization => u, :owner => random_user)
-    TeamUser.make(:user => random_user, :organization => u)
+    TeamUser.make(:user => random_user, :team => t)
     
     10.times do
-      TeamUser.make(:user => all_users.rand, :organization => u)
+      TeamUser.make(:user => all_users.rand, :team => t)
     end
   end
 end
