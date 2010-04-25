@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   
   before_filter :login_required
-  before_filter :find_project, :except => [:me, :show]
   
   def show
     @user = User.find_by_username(params[:id])
