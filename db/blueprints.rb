@@ -7,7 +7,7 @@ require 'time_extensions'
 countries = Country.all.map(&:ison)
 a_phone_type = Decode.all_values_by_decode_name("OP_Phone_Type")
 a_org_status = Decode.all_values_by_decode_name("MC_Org_Status")
-a_personal_web_page_type = Decode.all_values_by_decode_name("OP_Website_Type")
+a_web_page_type = Decode.all_values_by_decode_name("OP_Website_Type")
 
 Mcontact.blueprint do
   city          { Random.city }
@@ -23,7 +23,7 @@ Mcontact.blueprint do
   telnum2_type  { a_phone_type.rand }
   is_telnum1_public { Random.boolean }
   is_telnum2_public { Random.boolean }
-  email         { Random.email }
+  email          { Random.email }
   webpage1       { 'http://' + Faker::Internet.domain_name }
   webpage2       { 'http://' + Faker::Internet.domain_name }
   webpage3       { 'http://' + Faker::Internet.domain_name }
@@ -42,7 +42,17 @@ Organization.blueprint do
   specific_industry   { ["Mining", "Search Engine Optimization", "Automobile", "Knowledge Management"].rand }
 end
 
-OrganizationUser.blueprint do
-  role      { ["Owner", "Collaborator", "Vendor", "External Contact"].rand }
-  status    { a_org_status.rand }       
+Access.blueprint do
+  role      { ["O", "C", "V", "E"].rand }
+end
+
+Msocial.blueprint do
+  application { ["Facebook", "Twitter", "Orkut", "MySpace"].rand}
+  application_login { Faker::Name.first_name }
+  atoken { Random.alphanumeric }
+  asecret { Random.alphanumeric }
+end
+
+Team.blueprint do
+  name { Faker::Company.name }
 end

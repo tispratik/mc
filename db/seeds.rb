@@ -1,17 +1,19 @@
-require "#{RAILS_ROOT}/db/blueprints"
+require File.expand_path(File.dirname(__FILE__) + '/blueprints')
 
-[Usr, Ucontact, Education, Interest, Workposition, Uprofile].each(&:delete_all)
+[Mcontact, Organization, Access, Msocial, Team, TeamUser].each(&:delete_all)
 
-p "creating usr"
+all_users = User.all
 
-User.all.each do |u|
-  Usr.make(:user => u)
-  Ucontact.make(:user => u)
-  3.times do
-    Uprofile.make(:user => u)
-    Interest.make(:user => u)
-    Education.make(:user => u)
-    Workposition.make(:user => u)
-    Usocial.make(:user => u)
+p "Making Organizations"
+10.times do
+  u = Organization.make(:contact => Mcontact.make, :owner => all_users.rand)
+  5.times do
+    random_user = all_users.rand
+    t = Team.make(:organization => u, :owner => random_user)
+    TeamUser.make(:user => random_user, :organization => u)
+    
+    10.times do
+      TeamUser.make(:user => all_users.rand, :organization => u)
+    end
   end
 end
