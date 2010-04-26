@@ -34228,3 +34228,242 @@ Usr Columns (4.0ms)  SHOW FIELDS FROM `usrs`
 User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
 Rendered layouts/_header (3.0ms)
 Completed in 693ms (View: 257, DB: 23) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 127.0.0.1 at 2010-04-25 22:46:41) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (4.0ms)  SHOW FIELDS FROM `users`
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (0.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (4.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (0.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (5.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (0.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (5.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (4.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (14.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (84.0ms)
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (1.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (4.0ms)  SHOW FIELDS FROM `usrs`
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (6.0ms)
+Completed in 908ms (View: 239, DB: 23) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-25 22:46:43) [GET]
+Redirected to http://localhost:3007/
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 127.0.0.1 at 2010-04-25 22:46:44) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (5.0ms)  SHOW FIELDS FROM `users`
+User Load (2.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (4.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (0.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (4.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (4.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (3.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (13.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (143.0ms)
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (1.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (5.0ms)  SHOW FIELDS FROM `usrs`
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (3.0ms)
+Completed in 693ms (View: 256, DB: 22) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 97.91.155.3 at 2010-04-25 22:46:54) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (5.0ms)  SHOW FIELDS FROM `users`
+Redirected to http://pratik.homedns.org:3007/sign_in
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 564ms (DB: 0) | 302 Found [http://pratik.homedns.org/]
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UserSessionsController#new (for 97.91.155.3 at 2010-04-25 22:46:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"user_sessions"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (5.0ms)  SHOW FIELDS FROM `users`
+Rendering template within layouts/application
+Rendering user_sessions/new
+Rendered layouts/_header (0.0ms)
+Completed in 190ms (View: 32, DB: 1) | 200 OK [http://pratik.homedns.org/sign_in]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing ApplicationController#index (for 97.91.155.3 at 2010-04-25 22:46:56) [GET]
+Redirected to http://pratik.homedns.org:3007/sign_in
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UserSessionsController#new (for 97.91.155.3 at 2010-04-25 22:46:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"user_sessions"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (6.0ms)  SHOW FIELDS FROM `users`
+Rendering template within layouts/application
+Rendering user_sessions/new
+Rendered layouts/_header (0.0ms)
+Completed in 216ms (View: 22, DB: 2) | 200 OK [http://pratik.homedns.org/sign_in]
+SQL (3.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UserSessionsController#new (for 24.171.23.184 at 2010-04-25 22:49:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"user_sessions"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (5.0ms)  SHOW FIELDS FROM `users`
+Rendering template within layouts/application
+Rendering user_sessions/new
+Rendered layouts/_header (0.0ms)
+Completed in 195ms (View: 14, DB: 3) | 200 OK [http://pratik.homedns.org/sign_in]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing ApplicationController#index (for 24.171.23.184 at 2010-04-25 22:49:10) [GET]
+Redirected to http://pratik.homedns.org:3007/sign_in
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UserSessionsController#new (for 24.171.23.184 at 2010-04-25 22:49:13) [GET]
+  Parameters: {"action"=>"new", "controller"=>"user_sessions"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (5.0ms)  SHOW FIELDS FROM `users`
+Rendering template within layouts/application
+Rendering user_sessions/new
+Rendered layouts/_header (0.0ms)
+Completed in 319ms (View: 18, DB: 0) | 200 OK [http://pratik.homedns.org/sign_in]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UserSessionsController#create (for 24.171.23.184 at 2010-04-25 22:49:26) [POST]
+  Parameters: {"commit"=>"Sign in", "user_session"=>{"username"=>"dummy", "password"=>"[FILTERED]"}, "action"=>"create", "authenticity_token"=>"26SOZE20ToQKa/LmITwN/EwoIeCH965Qq1CU61s5ASQ=", "controller"=>"user_sessions"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (7.0ms)  SHOW FIELDS FROM `users`
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`username` = 'dummy') LIMIT 1
+SQL (1.0ms)  BEGIN
+User Update (2.0ms)  UPDATE `users` SET `updated_at` = '2010-04-26 03:49:26', `perishable_token` = '0JghbiiJRY5MN8ywMNfG' WHERE `id` = 1
+SQL (1.0ms)  COMMIT
+Redirected to http://pratik.homedns.org:3007/
+Completed in 411ms (DB: 1) | 302 Found [http://pratik.homedns.org/sign_in]
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 24.171.23.184 at 2010-04-25 22:49:27) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (8.0ms)  SHOW FIELDS FROM `users`
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (5.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (2.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (6.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (9.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (6.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (5.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (235.0ms)
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (0.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (6.0ms)  SHOW FIELDS FROM `usrs`
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (12.0ms)
+Completed in 1096ms (View: 411, DB: 14) | 200 OK [http://pratik.homedns.org/]
+SQL (3.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing ApplicationController#index (for 24.171.23.184 at 2010-04-25 22:49:28) [GET]
+Redirected to http://pratik.homedns.org:3007/
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 24.171.23.184 at 2010-04-25 22:49:29) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (6.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (11.0ms)  SHOW FIELDS FROM `users`
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (5.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (3.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (14.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (6.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (11.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (473.0ms)
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (2.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (7.0ms)  SHOW FIELDS FROM `usrs`
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (9.0ms)
+Completed in 1670ms (View: 783, DB: 19) | 200 OK [http://pratik.homedns.org/]
