@@ -4,6 +4,7 @@ class Organization < ActiveRecord::Base
   
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_user_id"
   has_one :mcontact
+  has_many :msocials
   has_many :teams
   has_many :organization_roles
   has_many :users, :through => :organization_roles
