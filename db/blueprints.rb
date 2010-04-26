@@ -6,7 +6,6 @@ require 'time_extensions'
 
 countries = Country.all.map(&:ison)
 a_phone_type = Decode.all_values_by_decode_name("OP_Phone_Type")
-a_org_status = Decode.all_values_by_decode_name("MC_Org_Status")
 a_web_page_type = Decode.all_values_by_decode_name("OP_Website_Type")
 
 Mcontact.blueprint do
@@ -34,11 +33,13 @@ Organization.blueprint do
   name                { ["Viridian", "Google", "Reliance", "eBay", "Walmart", "Tata Motors", "TCS", "Infosys", "DataCops"].rand }
   industry            { ["Engineering", "IT", "Mechanical", "BPO"].rand }
   specific_industry   { ["Mining", "Search Engine Optimization", "Automobile", "Knowledge Management"].rand }
+  use_ssl             { Random.boolean }
+  status              { Organization::STATUSES.rand.id }
 end
 
-Access.blueprint do
-  role      { ["O", "C", "V", "E"].rand }
-end
+#OrganizationRole.blueprint do
+#  role      { ["O", "C", "V", "E"].rand }
+#end
 
 Msocial.blueprint do
   application { ["Facebook", "Twitter", "Orkut", "MySpace"].rand}

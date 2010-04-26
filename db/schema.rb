@@ -11,16 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 20100424215138) do
 
-  create_table "accesses", :force => true do |t|
-    t.integer  "organization_id"
-    t.integer  "user_id"
-    t.string   "role"
-    t.integer  "reports_to_user_id"
-    t.integer  "ext_organization_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "mcontacts", :force => true do |t|
     t.string   "email"
     t.string   "country_id"
@@ -43,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20100424215138) do
     t.datetime "updated_at"
   end
 
+  add_index "mcontacts", ["country_id"], :name => "index_mcontacts_on_country_id"
+
   create_table "msocials", :force => true do |t|
     t.string   "application"
     t.string   "application_login"
@@ -52,14 +44,32 @@ ActiveRecord::Schema.define(:version => 20100424215138) do
     t.datetime "updated_at"
   end
 
+  create_table "organization_roles", :force => true do |t|
+    t.integer "organization_id"
+    t.integer "user_id"
+    t.string  "name"
+    t.integer "reports_to_user_id"
+    t.integer "ext_organization_id"
+  end
+
+  add_index "organization_roles", ["ext_organization_id"], :name => "index_organization_roles_on_ext_organization_id"
+  add_index "organization_roles", ["organization_id"], :name => "index_organization_roles_on_organization_id"
+  add_index "organization_roles", ["reports_to_user_id"], :name => "index_organization_roles_on_reports_to_user_id"
+  add_index "organization_roles", ["user_id"], :name => "index_organization_roles_on_user_id"
+
   create_table "organizations", :force => true do |t|
     t.string   "name"
+    t.integer  "status"
     t.integer  "owner_user_id"
     t.string   "industry"
     t.string   "specific_industry"
+    t.string   "hashkey"
+    t.boolean  "use_ssl"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "organizations", ["owner_user_id"], :name => "index_organizations_on_owner_user_id"
 
   create_table "team_users", :force => true do |t|
     t.integer  "team_id"
@@ -68,6 +78,9 @@ ActiveRecord::Schema.define(:version => 20100424215138) do
     t.datetime "updated_at"
   end
 
+  add_index "team_users", ["team_id"], :name => "index_team_users_on_team_id"
+  add_index "team_users", ["user_id"], :name => "index_team_users_on_user_id"
+
   create_table "teams", :force => true do |t|
     t.string   "name"
     t.integer  "organization_id"
@@ -75,5 +88,8 @@ ActiveRecord::Schema.define(:version => 20100424215138) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "teams", ["organization_id"], :name => "index_teams_on_organization_id"
+  add_index "teams", ["owner_user_id"], :name => "index_teams_on_owner_user_id"
 
 end

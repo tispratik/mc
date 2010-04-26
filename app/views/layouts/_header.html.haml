@@ -1,4 +1,12 @@
-- if @user && !@user.new_record?
+- if @organization && !@organization.new_record?
+  %h1
+    = @organization
+  
+  .menu
+    - [["Dashboard", "organizations", nil], ["Teams", "teams", :teams],].each do |link_name, link_controller, link_path|
+      = link_to link_name, [@organization, link_path], :class => (controller_name == link_controller) ? "current" : nil
+
+- elsif @user && !@user.new_record?
   %h1
     = @user
   

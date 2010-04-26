@@ -20,6 +20,9 @@ class CreateMcontacts < ActiveRecord::Migration
       t.boolean :is_email_verified
       t.timestamps
     end
+    
+    add_index 'mcontacts', 'country_id'
+    
   end
   
   def self.down

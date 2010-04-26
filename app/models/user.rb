@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   
   acts_as_authentic do |a|
     a.logged_in_timeout = 100.minutes # default is 10.minutes
-    a.validates_format_of_login_field_options :with => /^\w+$/, :message => "only numbers, letters and underscore allowed"
+    a.validates_format_of_login_field_options :with => /^\w+$/, :message =>"only numbers, letters and underscore allowed"
   end
   
-  def self.find_by_username_or_email(login)
+  def self.find_by_username_or_login_email(login)
     find_by_username(login) || find_by_login_email(login)
   end
   
@@ -34,4 +34,11 @@ class User < ActiveRecord::Base
     Thread.current[:curr_user] = user
   end
   
+  def my_organizations_with_roles
+    # Organization.all(:joins => "left join organization_invitations on organization_invitations.organization_id=organization.id",
+    #   :conditions => ["organizations.user_id = ? or (organization_invitations.user_id = ? and organization_invitations.confirmed=1)", id, id],
+    #   :group => "organizations.id"
+    # )
+    OrganizationRole.all(:conditions => {:user_id => id}, :include => :organization)
+  end
 end

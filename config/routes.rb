@@ -10,13 +10,15 @@ ActionController::Routing::Routes.draw do |map|
     session.destroy_user_session "sign_out", :action => :destroy, :conditions => {:method => :get}
   end
   
-  map.resources :organizations do |users|
-    map.resources :users
-    map.resources :teams
-    map.resources :team_users
-    map.resources :msocials
-    map.resources :mcontacts
-    map.resources :accesses
+  map.resources :users 
+
+  map.resources :organizations do |o|
+    o.resources :teams
+    o.resources :team_users
+    o.resources :msocials
+    o.resources :mcontacts
+    o.resources :accesses
+    o.resources :organization_roles, :as => :roles
   end
   
   map.resources :assets, :only => [:destroy]

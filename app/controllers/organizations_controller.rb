@@ -1,134 +1,58 @@
 class OrganizationsController < ApplicationController
   
-  before_filter :load_resource, :only => [:show, :edit, :update, :destroy]
-  before_filter :load_and_paginate_resources, :only => [:index]
+  before_filter :login_required
+  before_filter :find_organization, :only => [:show, :edit, :update, :destroy]
+  before_filter :check_organization_membership, :only => [:show]
+  before_filter :check_organization_ownership, :only => [:edit, :update, :destroy]
   
-  # GET /organizations
-  # GET /organizations.js
-  # GET /organizations.xml
-  # GET /organizations.json
   def index
-    respond_to do |format|
-      format.html # index.html.haml
-      format.js   # index.js.rjs
-      format.xml  { render :xml => @organizations }
-      format.json  { render :json => @organizations }
-    end
-  end
-  
-  # GET /organizations/:id
-  # GET /organizations/:id.js
-  # GET /organizations/:id.xml
-  # GET /organizations/:id.json
-  def show
-    respond_to do |format|
-      format.html # show.html.haml
-      format.js   # show.js.rjs
-      format.xml  { render :xml => @organizations }
-      format.json  { render :json => @organizations }
-    end
-  end
-  
-  # GET /organizations/new
-  # GET /organizations/new.js
-  # GET /organizations/new.xml
-  # GET /organizations/new.json
-  def new
-    @organization = Organization.new
+    opts = {}
+    opts[:order] = params[:order_by] if params[:order_by]
     
-    respond_to do |format|
-      format.html # new.html.haml
-      format.js   # new.js.rjs
-      format.xml  { render :xml => @organization }
-      format.json  { render :json => @organization }
-    end
+    @organizations = current_user.organizations.paginate(opts.merge(:page => params[:page] || 1, :per_page => 10))
   end
   
-  # GET /organizations/:id/edit
-  def edit
+  def show
   end
   
-  # POST /organizations
-  # POST /organizations.js
-  # POST /organizations.xml
-  # POST /organizations.json
+  def new
+    @organization = current_user.organizations.new
+  end
+  
   def create
     @organization = Organization.new(params[:organization])
     
-    respond_to do |format|
-      if @organization.save
-        flash[:notice] = "Organization was successfully created."
-        format.html { redirect_to(@organization) }
-        format.js   # create.js.rjs
-        format.xml  { render :xml => @organization, :status => :created, :location => @organization }
-        format.json  { render :json => @organization, :status => :created, :location => @organization }
-      else
-        flash[:error] = "Organization could not be created."
-        format.html { render 'new' }
-        format.js   # create.js.rjs
-        format.xml  { render :xml => @organization.errors, :status => :unprocessable_entity }
-        format.json  { render :json => @organization.errors, :status => :unprocessable_entity }
-      end
+    if @organization.save
+      flash[:notice] = 'Organization was successfully created.'
+      redirect_to @organization
+    else
+      render :new
     end
   end
   
-  # PUT /organizations/:id
-  # PUT /organizations/:id.js
-  # PUT /organizations/:id.xml
-  # PUT /organizations/:id.json
+  def edit
+  end
+  
   def update
-    respond_to do |format|
-      if @organization.update_attributes(params[:organization])
-        flash[:notice] = "Organization was successfully updated."
-        format.html { redirect_to(@organization) }
-        format.js   # update.js.rjs
-        format.xml  { head :ok }
-        format.json  { head :ok }
-      else
-        flash[:error] = "Organization could not be updated."
-        format.html { render 'edit' }
-        format.js   # update.js.rjs
-        format.xml  { render :xml => @organization.errors, :status => :unprocessable_entity }
-        format.json  { render :json => @organization.errors, :status => :unprocessable_entity }
-      end
+    if @organization.update_attributes(params[:organization])
+      flash[:notice] = 'Organization was successfully updated.'
+      redirect_to @organization
+    else
+      render :edit
     end
   end
   
-  # DELETE /organizations/:id
-  # DELETE /organizations/:id.js
-  # DELETE /organizations/:id.xml
-  # DELETE /organizations/:id.json
   def destroy
-    respond_to do |format|
-      if @organization.destroy
-        flash[:notice] = "Organization was successfully destroyed."
-        format.html { redirect_to(organizations_url) }
-        format.js   # destroy.js.rjs
-        format.xml  { head :ok }
-        format.json  { head :ok }
-      else
-        flash[:error] = "Organization could not be destroyed."
-        format.html { redirect_to(organization_url(@organization)) }
-        format.js   # destroy.js.rjs
-        format.xml  { head :unprocessable_entity }
-        format.json  { head :unprocessable_entity }
-      end
-    end
+    @organization.destroy
+    flash[:notice] = 'Organization was successfully removed.'
+    redirect_to organizations_path
   end
   
-  protected
-    
-    def collection
-      paginate_options ||= {}
-      paginate_options[:page] ||= (params[:page] || 1)
-      paginate_options[:per_page] ||= (params[:per_page] || 20)
-      @collection = @organizations ||= Organization.paginate(paginate_options)
-    end
-    alias :load_and_paginate_resources :collection
-    
-    def resource
-      @resource = @organization ||= Organization.find(params[:id])
-    end
-    alias :load_resource :resource
-    
+  private
+  
+  def find_organization
+    params[:organization_id] = params[:id]
+    super
+  end
+  
 end

@@ -1,0 +1,5 @@
+%h1 My Organizations
+.organizations
+  - user.my_organizations_with_roles.each do |role|
+    .project{:class => (@organization && @organization == role.organization) ? "current": ""}
+      = link_to role.organization.to_s(), role.organization

@@ -30,4 +30,28 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def find_organization
+    @organization = Organization.find_by_hashkey(UrlStore.decode(params[:organization_id]))
+    if @organization.use_ssl?
+      ssl_required
+    end
+  end
+  
+  def check_organization_membership
+    # check for any access within organization
+    if @organization.roles.first(:conditions => {:user_id => current_user.id})
+      #allowed to proceed
+    else
+      record_not_found
+    end
+  end
+  
+  def check_organization_ownership
+    if @organization.roles.first(:conditions => {:user_id => current_user.id, :name => "O"})
+      #allowed to proceed
+    else
+      record_not_found
+    end
+  end
+  
 end

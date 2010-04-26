@@ -6,6 +6,10 @@ class CreateTeamUsers < ActiveRecord::Migration
       
       t.timestamps
     end
+    
+    add_index 'team_users', 'team_id'
+    add_index 'team_users', 'user_id'
+    
   end
   
   def self.down
