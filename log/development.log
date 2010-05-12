@@ -696,3 +696,2621 @@ ActiveRecord::StatementInvalid (Mysql::Error: Table 'mc_development.assets' does
 Rendered rescues/_trace (66.0ms)
 Rendered rescues/_request_and_response (3.0ms)
 Rendering rescues/layout (internal_server_error)
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+SQL (279.0ms)  DROP DATABASE IF EXISTS `mc_development`
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+SQL (2.0ms)  CREATE DATABASE `mc_development` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_general_ci`
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+SQL (0.0ms)  SHOW TABLES
+SQL (29.0ms)  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+SQL (58.0ms)  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+SQL (4.0ms)  SHOW TABLES
+SQL (1.0ms)  SELECT version FROM schema_migrations
+Migrating to CreateOrganizations (20100424215056)
+SQL (6.0ms)  CREATE TABLE `organizations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `status` int(11), `owner_user_id` int(11), `industry` varchar(255), `specific_industry` varchar(255), `hashkey` varchar(255), `use_ssl` tinyint(1), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+SQL (86.0ms)  CREATE INDEX `index_organizations_on_owner_user_id` ON `organizations` (`owner_user_id`)
+SQL (4.0ms)  INSERT INTO schema_migrations (version) VALUES ('20100424215056')
+Migrating to CreateOrganizationRoles (20100424215107)
+SQL (40.0ms)  CREATE TABLE `organization_roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `organization_id` int(11), `user_id` int(11), `name` varchar(255), `reports_to_user_id` int(11), `ext_organization_id` int(11)) ENGINE=InnoDB
+SQL (61.0ms)  CREATE INDEX `index_organization_roles_on_organization_id` ON `organization_roles` (`organization_id`)
+SQL (69.0ms)  CREATE INDEX `index_organization_roles_on_user_id` ON `organization_roles` (`user_id`)
+SQL (62.0ms)  CREATE INDEX `index_organization_roles_on_reports_to_user_id` ON `organization_roles` (`reports_to_user_id`)
+SQL (63.0ms)  CREATE INDEX `index_organization_roles_on_ext_organization_id` ON `organization_roles` (`ext_organization_id`)
+SQL (4.0ms)  INSERT INTO schema_migrations (version) VALUES ('20100424215107')
+Migrating to CreateMcontacts (20100424215116)
+SQL (37.0ms)  CREATE TABLE `mcontacts` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `email` varchar(255), `country_id` varchar(255), `state` varchar(255), `city` varchar(255), `street1` varchar(255), `street2` varchar(255), `zip` varchar(255), `telnum1` varchar(255), `telnum1_type` int(11), `telnum2` varchar(255), `telnum2_type` int(11), `webpage1` varchar(255), `webpage1_type` int(11), `webpage2` varchar(255), `webpage2_type` int(11), `short_description` varchar(255), `is_email_verified` tinyint(1), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+SQL (87.0ms)  CREATE INDEX `index_mcontacts_on_country_id` ON `mcontacts` (`country_id`)
+SQL (2.0ms)  INSERT INTO schema_migrations (version) VALUES ('20100424215116')
+Migrating to CreateMsocials (20100424215124)
+SQL (50.0ms)  CREATE TABLE `msocials` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `application` varchar(255), `application_login` varchar(255), `atoken` varchar(255), `asecret` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+SQL (3.0ms)  INSERT INTO schema_migrations (version) VALUES ('20100424215124')
+Migrating to CreateTeams (20100424215131)
+SQL (50.0ms)  CREATE TABLE `teams` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `organization_id` int(11), `owner_user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+SQL (55.0ms)  CREATE INDEX `index_teams_on_organization_id` ON `teams` (`organization_id`)
+SQL (62.0ms)  CREATE INDEX `index_teams_on_owner_user_id` ON `teams` (`owner_user_id`)
+SQL (1.0ms)  INSERT INTO schema_migrations (version) VALUES ('20100424215131')
+Migrating to CreateTeamUsers (20100424215138)
+SQL (27.0ms)  CREATE TABLE `team_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `team_id` int(11), `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+SQL (46.0ms)  CREATE INDEX `index_team_users_on_team_id` ON `team_users` (`team_id`)
+SQL (54.0ms)  CREATE INDEX `index_team_users_on_user_id` ON `team_users` (`user_id`)
+SQL (11.0ms)  INSERT INTO schema_migrations (version) VALUES ('20100424215138')
+Migrating to CreateDelayedJobs (100000000000000)
+SQL (9.0ms)  SHOW TABLES
+SQL (7.0ms)  CREATE TABLE `delayed_jobs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `priority` int(11) DEFAULT 0, `attempts` int(11) DEFAULT 0, `handler` text, `last_error` text, `run_at` datetime, `locked_at` datetime, `failed_at` datetime, `locked_by` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+SQL (61.0ms)  CREATE INDEX `delayed_jobs_priority` ON `delayed_jobs` (`priority`, `run_at`)
+SQL (4.0ms)  INSERT INTO schema_migrations (version) VALUES ('100000000000000')
+SQL (3.0ms)  SHOW TABLES
+SQL (0.0ms)  SELECT version FROM schema_migrations
+SQL (2.0ms)  SHOW TABLES
+SQL (4.0ms)  SHOW FIELDS FROM `delayed_jobs`
+SQL (8.0ms)  describe `delayed_jobs`
+SQL (4.0ms)  SHOW KEYS FROM `delayed_jobs`
+SQL (4.0ms)  SHOW FIELDS FROM `mcontacts`
+SQL (11.0ms)  describe `mcontacts`
+SQL (7.0ms)  SHOW KEYS FROM `mcontacts`
+SQL (4.0ms)  SHOW FIELDS FROM `msocials`
+SQL (8.0ms)  describe `msocials`
+SQL (6.0ms)  SHOW KEYS FROM `msocials`
+SQL (4.0ms)  SHOW FIELDS FROM `organization_roles`
+SQL (7.0ms)  describe `organization_roles`
+SQL (3.0ms)  SHOW KEYS FROM `organization_roles`
+SQL (4.0ms)  SHOW FIELDS FROM `organizations`
+SQL (18.0ms)  describe `organizations`
+SQL (15.0ms)  SHOW KEYS FROM `organizations`
+SQL (4.0ms)  SHOW FIELDS FROM `team_users`
+SQL (7.0ms)  describe `team_users`
+SQL (4.0ms)  SHOW KEYS FROM `team_users`
+SQL (4.0ms)  SHOW FIELDS FROM `teams`
+SQL (11.0ms)  describe `teams`
+SQL (8.0ms)  SHOW KEYS FROM `teams`
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Country Load (13.0ms)  SELECT * FROM `countries` ORDER BY name
+Country Columns (4.0ms)  SHOW FIELDS FROM `countries`
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (4.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Website_Type') ORDER BY sort_order
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Mcontact Delete all (0.0ms)  DELETE FROM `mcontacts` 
+Organization Delete all (0.0ms)  DELETE FROM `organizations` 
+OrganizationRole Delete all (0.0ms)  DELETE FROM `mc_development`.`organization_roles` 
+Msocial Delete all (1.0ms)  DELETE FROM `msocials` 
+Team Delete all (0.0ms)  DELETE FROM `teams` 
+TeamUser Delete all (0.0ms)  DELETE FROM `team_users` 
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (4.0ms)  SHOW FIELDS FROM `users`
+User Load (1.0ms)  SELECT * FROM `users` 
+Mcontact Columns (4.0ms)  SHOW FIELDS FROM `mcontacts`
+SQL (0.0ms)  BEGIN
+Mcontact Create (0.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Pofadder', '13658', '2010-05-12 04:57:11', 19, 1, '16086 Birch Ct', 'voluptatum magni qui ratione sit sed impedit ut dolorem sequi', '2010-05-12 04:57:11', 364, 'Side 574', 25, 'http://schinnermarquardt.co.uk', 'http://baumbachrutherford.co.uk', '011-17-49-5026', '011-34-32-7208', 'mwhite@yahoo.com', 'US.AL', 20, 25)
+SQL (2.0ms)  COMMIT
+Mcontact Load (0.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 1) 
+User Load (0.0ms)  SELECT * FROM `users` LIMIT 1
+Organization Columns (3.0ms)  SHOW FIELDS FROM `organizations`
+SQL (0.0ms)  BEGIN
+Organization Create (1.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('Google', '2010-05-12 04:57:11', 'Search Engine Optimization', '2010-05-12 04:57:11', '54qeZKKIo3wkWxc0X_Q9', 1, 29, 1, 'IT')
+OrganizationRole Columns (3.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 1) 
+OrganizationRole Create (1.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 1)
+Mcontact Update (0.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:11' WHERE `id` = 1
+SQL (1.0ms)  COMMIT
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 1) 
+Team Columns (3.0ms)  SHOW FIELDS FROM `teams`
+SQL (5.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Mohr, Kirlin and Murphy', '2010-05-12 04:57:11', '2010-05-12 04:57:11', 12, 1)
+SQL (3.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 1) 
+TeamUser Columns (3.0ms)  SHOW FIELDS FROM `team_users`
+SQL (3.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 12, 1)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 1) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 6, 1)
+SQL (18.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 2) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 9, 1)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 3) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 8, 1)
+SQL (16.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 4) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 11, 1)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 5) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 9, 1)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 6) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 9, 1)
+SQL (2.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 7) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 5, 1)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 8) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 9, 1)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 9) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 4, 1)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 10) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 7, 1)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 11) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Schmitt and Sons', '2010-05-12 04:57:11', '2010-05-12 04:57:11', 8, 1)
+SQL (7.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 2) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 8, 2)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 12) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 8, 2)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 13) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 11, 2)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 14) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:11', '2010-05-12 04:57:11', 9, 2)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 15) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 12, 2)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 16) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 5, 2)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 17) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 2)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 18) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 7, 2)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 19) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 4, 2)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 20) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 2)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 21) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 2)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 22) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Balistreri, Kohler and Lemke', '2010-05-12 04:57:12', '2010-05-12 04:57:12', 3, 1)
+SQL (1.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 3) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 3, 3)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 23) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 3)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 24) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 3)
+SQL (2.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 25) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 3)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 26) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 2, 3)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 27) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 2, 3)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 28) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 12, 3)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 29) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 5, 3)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 30) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 7, 3)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 31) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 3)
+SQL (3.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 32) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 3, 3)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 33) 
+SQL (1.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Dooley, Stoltenberg and Emard', '2010-05-12 04:57:12', '2010-05-12 04:57:12', 7, 1)
+SQL (22.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 4) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 7, 4)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 34) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 4)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 35) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 9, 4)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 36) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 4)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 37) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 5, 4)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 38) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 11, 4)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 39) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 12, 4)
+SQL (26.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 40) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 3, 4)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 41) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 4)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 42) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 5, 4)
+SQL (2.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 43) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 4)
+SQL (11.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 44) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Towne-Streich', '2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 1)
+SQL (4.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 5) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 5)
+SQL (2.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 45) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 9, 5)
+SQL (12.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 46) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 5)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 47) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 9, 5)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 48) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 3, 5)
+SQL (12.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 49) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 12, 5)
+SQL (26.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 50) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 6, 5)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 51) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 6, 5)
+SQL (2.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 52) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 6, 5)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 53) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 2, 5)
+SQL (26.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 54) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 5)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 55) 
+SQL (1.0ms)  BEGIN
+Mcontact Create (0.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Grove', '39602', '2010-05-12 04:57:12', 19, 0, '17191 Cherry Pl', 'aperiam aliquam aut est qui ut quos accusamus quisquam quisquam vel itaque est quisquam rerum dolores ab iusto consequatur quisquam dolor error in et qui', '2010-05-12 04:57:12', 528, 'Apt 992', 22, 'http://goldner.com', 'http://schuppe.co.uk', '011-3-57-8852', '011-87-99-2743', 'qsmith@msn.com', 'US.FL', 20, 27)
+SQL (14.0ms)  COMMIT
+Mcontact Load (1.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 2) 
+User Load (0.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (0.0ms)  BEGIN
+Organization Create (0.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('Reliance', '2010-05-12 04:57:12', 'Search Engine Optimization', '2010-05-12 04:57:12', 'Fnm-anplwrYY_B3-AY3T', 1, 29, 0, 'IT')
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 2) 
+OrganizationRole Create (0.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 2)
+Mcontact Update (1.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:12' WHERE `id` = 2
+SQL (7.0ms)  COMMIT
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 2) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Pfannerstill Group', '2010-05-12 04:57:12', '2010-05-12 04:57:12', 8, 2)
+SQL (20.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 6) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 8, 6)
+SQL (18.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 56) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 6, 6)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 57) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 2, 6)
+SQL (16.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 58) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 7, 6)
+SQL (18.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 59) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 12, 6)
+SQL (2.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 60) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 7, 6)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 61) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 12, 6)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 62) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 6, 6)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 63) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 3, 6)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 64) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 9, 6)
+SQL (26.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 65) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 6)
+SQL (3.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 66) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Powlowski, Buckridge and Harris', '2010-05-12 04:57:12', '2010-05-12 04:57:12', 11, 2)
+SQL (7.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 7) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 11, 7)
+SQL (22.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 67) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 2, 7)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 68) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 7, 7)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 69) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 2, 7)
+SQL (31.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 70) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 3, 7)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 71) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 4, 7)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 72) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 1, 7)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 73) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 3, 7)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 74) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 12, 7)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 75) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 4, 7)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 76) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:12', '2010-05-12 04:57:12', 10, 7)
+SQL (21.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 77) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Stroman-Howe', '2010-05-12 04:57:13', '2010-05-12 04:57:13', 9, 2)
+SQL (17.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 8) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 9, 8)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 78) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 8, 8)
+SQL (16.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 79) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 2, 8)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 80) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 7, 8)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 81) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 6, 8)
+SQL (22.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 82) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 3, 8)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 83) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 1, 8)
+SQL (8.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 84) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 11, 8)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 85) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 1, 8)
+SQL (29.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 86) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 6, 8)
+SQL (48.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 87) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 12, 8)
+SQL (15.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 88) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Romaguera, Abshire and Hackett', '2010-05-12 04:57:13', '2010-05-12 04:57:13', 10, 2)
+SQL (4.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 9) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 10, 9)
+SQL (8.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 89) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 11, 9)
+SQL (21.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 90) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 3, 9)
+SQL (96.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 91) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 11, 9)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 92) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 2, 9)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 93) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 3, 9)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 94) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 8, 9)
+SQL (51.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 95) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 12, 9)
+SQL (2.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 96) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 2, 9)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 97) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 11, 9)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 98) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 12, 9)
+SQL (125.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 99) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Homenick and Sons', '2010-05-12 04:57:13', '2010-05-12 04:57:13', 7, 2)
+SQL (22.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 10) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 7, 10)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 100) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 4, 10)
+SQL (8.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 101) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 11, 10)
+SQL (96.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 102) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 11, 10)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 103) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 9, 10)
+SQL (27.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 104) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 7, 10)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 105) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:13', '2010-05-12 04:57:13', 6, 10)
+SQL (97.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 106) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 11, 10)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 107) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 8, 10)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 108) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 12, 10)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 109) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 8, 10)
+SQL (49.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 110) 
+SQL (0.0ms)  BEGIN
+Mcontact Create (0.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Henneman', '80325', '2010-05-12 04:57:14', 21, 0, '39820 Beech Circle', 'qui a ipsum aut aspernatur nihil beatae architecto repellendus maxime nesciunt animi totam rerum blanditiis voluptas consequatur eos omnis quam et nihil vero quia sapiente quod a quae aut cumque voluptatem ipsam omnis architecto delectus voluptatem error nisi voluptas rerum', '2010-05-12 04:57:14', 166, 'Spc 944', 22, 'http://nolan.co.uk', 'http://crookssporer.info', '011-13-30-1138', '011-15-59-7430', 'dthatcher@hotmail.com', 'US.MA', 19, 24)
+SQL (5.0ms)  COMMIT
+Mcontact Load (1.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 3) 
+User Load (1.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (0.0ms)  BEGIN
+Organization Create (1.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('Reliance', '2010-05-12 04:57:14', 'Automobile', '2010-05-12 04:57:14', 'vqr4Wx-JiuzJKiJUhcvM', 1, 29, 1, 'Mechanical')
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 3) 
+OrganizationRole Create (1.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 3)
+Mcontact Update (1.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:14' WHERE `id` = 3
+SQL (7.0ms)  COMMIT
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 3) 
+SQL (1.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Schimmel-Blanda', '2010-05-12 04:57:14', '2010-05-12 04:57:14', 2, 3)
+SQL (22.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 11) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 2, 11)
+SQL (97.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 111) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 10, 11)
+SQL (18.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 112) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 4, 11)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 113) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 12, 11)
+SQL (27.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 114) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 5, 11)
+SQL (96.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 115) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 12, 11)
+SQL (18.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 116) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 2, 11)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 117) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 5, 11)
+SQL (28.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 118) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 7, 11)
+SQL (97.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 119) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 2, 11)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 120) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 9, 11)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 121) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Mosciski, Farrell and Morar', '2010-05-12 04:57:14', '2010-05-12 04:57:14', 5, 3)
+SQL (7.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 12) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 5, 12)
+SQL (52.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 122) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 10, 12)
+SQL (2.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 123) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 11, 12)
+SQL (6.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 124) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 7, 12)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 125) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 12, 12)
+SQL (6.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 126) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 4, 12)
+SQL (21.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 127) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 7, 12)
+SQL (96.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 128) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 7, 12)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 129) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 7, 12)
+SQL (28.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 130) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:14', '2010-05-12 04:57:14', 12, 12)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 131) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 3, 12)
+SQL (47.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 132) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Effertz LLC', '2010-05-12 04:57:15', '2010-05-12 04:57:15', 7, 3)
+SQL (3.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 13) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 7, 13)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 133) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 4, 13)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 134) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 11, 13)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 135) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 5, 13)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 136) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 7, 13)
+SQL (97.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 137) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 12, 13)
+SQL (18.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 138) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 2, 13)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 139) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 12, 13)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 140) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 12, 13)
+SQL (51.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 141) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 8, 13)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 142) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 3, 13)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 143) 
+SQL (1.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Watsica, Lakin and Block', '2010-05-12 04:57:15', '2010-05-12 04:57:15', 11, 3)
+SQL (16.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 14) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 11, 14)
+SQL (47.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 144) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 5, 14)
+SQL (3.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 145) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 5, 14)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 146) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 6, 14)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 147) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 11, 14)
+SQL (96.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 148) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 6, 14)
+SQL (26.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 149) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 9, 14)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 150) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 9, 14)
+SQL (27.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 151) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 9, 14)
+SQL (97.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 152) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 10, 14)
+SQL (18.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 153) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 11, 14)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 154) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Beatty, Tillman and Hansen', '2010-05-12 04:57:15', '2010-05-12 04:57:15', 12, 3)
+SQL (27.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 15) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 12, 15)
+SQL (96.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 155) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 11, 15)
+SQL (18.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 156) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 11, 15)
+SQL (3.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 157) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 10, 15)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 158) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:15', '2010-05-12 04:57:15', 5, 15)
+SQL (50.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 159) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 4, 15)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 160) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 2, 15)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 161) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 3, 15)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 162) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 10, 15)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 163) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 6, 15)
+SQL (3.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 164) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 9, 15)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 165) 
+SQL (0.0ms)  BEGIN
+Mcontact Create (0.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Muntaung', '85250', '2010-05-12 04:57:16', 21, 0, '8907 2nd Pl', 'libero dolores veritatis est autem est vel repellat ex dicta quia repellendus dolor quos totam natus repellat incidunt aut nesciunt quod voluptas blanditiis odit omnis saepe dolorem recusandae itaque dolorum quia corrupti corrupti omnis quo accusantium', '2010-05-12 04:57:16', 690, 'Trlr 245', 22, 'http://ratkefarrell.us', 'http://kingblick.biz', '011-56-43-10014', '011-26-74-5227', 'brobertson@webmail.com', 'US.NC', 21, 24)
+SQL (28.0ms)  COMMIT
+Mcontact Load (1.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 4) 
+User Load (0.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (1.0ms)  BEGIN
+Organization Create (0.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('Walmart', '2010-05-12 04:57:16', 'Automobile', '2010-05-12 04:57:16', 'aFKS3tkXrYO3Ep_8IqZA', 1, 29, 0, 'IT')
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 4) 
+OrganizationRole Create (0.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 4)
+Mcontact Update (0.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:16' WHERE `id` = 4
+SQL (86.0ms)  COMMIT
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 4) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Rau-Kuphal', '2010-05-12 04:57:16', '2010-05-12 04:57:16', 11, 4)
+SQL (17.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 16) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 11, 16)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 166) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 12, 16)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 167) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 7, 16)
+SQL (51.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 168) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 2, 16)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 169) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 10, 16)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 170) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 10, 16)
+SQL (21.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 171) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 11, 16)
+SQL (51.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 172) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 11, 16)
+SQL (21.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 173) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 1, 16)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 174) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 4, 16)
+SQL (26.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 175) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 5, 16)
+SQL (96.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 176) 
+SQL (1.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Fritsch Group', '2010-05-12 04:57:16', '2010-05-12 04:57:16', 8, 4)
+SQL (17.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 17) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 8, 17)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 177) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 1, 17)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 178) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 12, 17)
+SQL (51.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 179) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 3, 17)
+SQL (9.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 180) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 3, 17)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 181) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 11, 17)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 182) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 9, 17)
+SQL (97.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 183) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 5, 17)
+SQL (26.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 184) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 11, 17)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 185) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 11, 17)
+SQL (6.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 186) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:16', '2010-05-12 04:57:16', 9, 17)
+SQL (47.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 187) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Skiles Inc', '2010-05-12 04:57:17', '2010-05-12 04:57:17', 4, 4)
+SQL (4.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 18) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 4, 18)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 188) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 4, 18)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 189) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 6, 18)
+SQL (47.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 190) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 4, 18)
+SQL (16.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 191) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 10, 18)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 192) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 4, 18)
+SQL (27.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 193) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 8, 18)
+SQL (171.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 194) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 5, 18)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 195) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 1, 18)
+SQL (20.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 196) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 7, 18)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 197) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 11, 18)
+SQL (48.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 198) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Rippin and Sons', '2010-05-12 04:57:17', '2010-05-12 04:57:17', 11, 4)
+SQL (3.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 19) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 11, 19)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 199) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 9, 19)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 200) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 10, 19)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 201) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 12, 19)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 202) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 3, 19)
+SQL (97.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 203) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 3, 19)
+SQL (18.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 204) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 12, 19)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 205) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 11, 19)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 206) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 11, 19)
+SQL (52.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 207) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 3, 19)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 208) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 3, 19)
+SQL (27.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 209) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Mertz, Wunsch and Mertz', '2010-05-12 04:57:17', '2010-05-12 04:57:17', 5, 4)
+SQL (51.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 20) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 5, 20)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 210) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 6, 20)
+SQL (24.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 211) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 6, 20)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 212) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:17', '2010-05-12 04:57:17', 8, 20)
+SQL (97.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 213) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 4, 20)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 214) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 12, 20)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 215) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 4, 20)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 216) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 3, 20)
+SQL (22.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 217) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 8, 20)
+SQL (97.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 218) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 8, 20)
+SQL (10.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 219) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 5, 20)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 220) 
+SQL (0.0ms)  BEGIN
+Mcontact Create (1.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Bultfontein', '64328', '2010-05-12 04:57:18', 17, 0, '21799 Linden St', 'labore et ut magnam nostrum aut vel ut quia beatae dolorem enim sed assumenda omnis quam praesentium qui totam magnam cumque totam nulla', '2010-05-12 04:57:18', 72, 'Ph 631', 22, 'http://lang.us', 'http://greenfelder.ca', '011-78-52-2625', '011-28-41-3241', 'xharris@gmail.com', 'US.LA', 20, 26)
+SQL (20.0ms)  COMMIT
+Mcontact Load (1.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 5) 
+User Load (0.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (1.0ms)  BEGIN
+Organization Create (0.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('DataCops', '2010-05-12 04:57:18', 'Mining', '2010-05-12 04:57:18', 'nIa9IaqV67R1MYoUlDDT', 1, 29, 0, 'BPO')
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 5) 
+OrganizationRole Create (0.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 5)
+Mcontact Update (0.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:18' WHERE `id` = 5
+SQL (1.0ms)  COMMIT
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 5) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Bernhard, West and Abshire', '2010-05-12 04:57:18', '2010-05-12 04:57:18', 6, 5)
+SQL (27.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 21) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (2.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 6, 21)
+SQL (3.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 221) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 10, 21)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 222) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 1, 21)
+SQL (12.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 223) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 12, 21)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 224) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 5, 21)
+SQL (2.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 225) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 2, 21)
+SQL (12.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 226) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 2, 21)
+SQL (25.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 227) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 8, 21)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 228) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 1, 21)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 229) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 12, 21)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 230) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 10, 21)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 231) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Braun, Smitham and Nitzsche', '2010-05-12 04:57:18', '2010-05-12 04:57:18', 3, 5)
+SQL (4.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 22) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 3, 22)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 232) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 12, 22)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 233) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 6, 22)
+SQL (6.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 234) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 4, 22)
+SQL (31.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 235) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 7, 22)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 236) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 1, 22)
+SQL (19.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 237) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 7, 22)
+SQL (3.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 238) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 10, 22)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 239) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 2, 22)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 240) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 12, 22)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 241) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 7, 22)
+SQL (18.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 242) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Rath Group', '2010-05-12 04:57:18', '2010-05-12 04:57:18', 3, 5)
+SQL (17.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 23) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 3, 23)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 243) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 4, 23)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 244) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 1, 23)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 245) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 9, 23)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 246) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 12, 23)
+SQL (22.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 247) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 2, 23)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 248) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 5, 23)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 249) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 6, 23)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 250) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 7, 23)
+SQL (27.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 251) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 7, 23)
+SQL (18.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 252) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 11, 23)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 253) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Marvin Inc', '2010-05-12 04:57:18', '2010-05-12 04:57:18', 3, 5)
+SQL (24.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 24) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 3, 24)
+SQL (16.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 254) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:18', '2010-05-12 04:57:18', 9, 24)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 255) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 11, 24)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 256) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 4, 24)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 257) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 8, 24)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 258) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 2, 24)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 259) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 6, 24)
+SQL (27.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 260) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 4, 24)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 261) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 1, 24)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 262) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 12, 24)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 263) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 5, 24)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 264) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Bruen Inc', '2010-05-12 04:57:19', '2010-05-12 04:57:19', 4, 5)
+SQL (22.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 25) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 4, 25)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 265) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 11, 25)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 266) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 9, 25)
+SQL (6.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 267) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 3, 25)
+SQL (21.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 268) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 3, 25)
+SQL (2.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 269) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 7, 25)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 270) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 7, 25)
+SQL (9.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 271) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 12, 25)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 272) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 11, 25)
+SQL (15.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 273) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 9, 25)
+SQL (2.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 274) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 4, 25)
+SQL (18.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 275) 
+SQL (0.0ms)  BEGIN
+Mcontact Create (1.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Sebokeng', '99616', '2010-05-12 04:57:19', 18, 0, '27239 Oak Circle', 'architecto possimus enim ex ad sunt ipsa non vero voluptatibus rerum et ut voluptatem sint excepturi rerum ipsam et', '2010-05-12 04:57:19', 858, 'Bldg 403', 25, 'http://jacobi.com', 'http://marvinlueilwitz.co.uk', '011-78-30-5612', '011-90-31-3237', 'wabel@gmail.com', 'US.RI', 21, 24)
+SQL (2.0ms)  COMMIT
+Mcontact Load (1.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 6) 
+User Load (1.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (0.0ms)  BEGIN
+Organization Create (1.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('Tata Motors', '2010-05-12 04:57:19', 'Search Engine Optimization', '2010-05-12 04:57:19', 'SBJDVE8b2eHu3yAGCTC3', 1, 29, 1, 'Engineering')
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 6) 
+OrganizationRole Create (2.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 6)
+Mcontact Update (1.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:19' WHERE `id` = 6
+SQL (21.0ms)  COMMIT
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 6) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Herman LLC', '2010-05-12 04:57:19', '2010-05-12 04:57:19', 7, 6)
+SQL (17.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 26) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 7, 26)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 276) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 10, 26)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 277) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 3, 26)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 278) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 2, 26)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 279) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 11, 26)
+SQL (6.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 280) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 9, 26)
+SQL (31.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 281) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 4, 26)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 282) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 10, 26)
+SQL (8.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 283) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 12, 26)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 284) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 10, 26)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 285) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 5, 26)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 286) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Armstrong-Lowe', '2010-05-12 04:57:19', '2010-05-12 04:57:19', 12, 6)
+SQL (20.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 27) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 12, 27)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 287) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 4, 27)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 288) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 3, 27)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 289) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (2.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 1, 27)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 290) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 12, 27)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 291) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 11, 27)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 292) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 6, 27)
+SQL (21.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 293) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 1, 27)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 294) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 7, 27)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 295) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 8, 27)
+SQL (25.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 296) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 7, 27)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 297) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Grimes Inc', '2010-05-12 04:57:19', '2010-05-12 04:57:19', 12, 6)
+SQL (22.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 28) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 12, 28)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 298) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 7, 28)
+SQL (27.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 299) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 2, 28)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 300) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 3, 28)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 301) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:19', '2010-05-12 04:57:19', 6, 28)
+SQL (20.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 302) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 7, 28)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 303) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 12, 28)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 304) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 2, 28)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 305) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 1, 28)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 306) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 1, 28)
+SQL (2.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 307) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 12, 28)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 308) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Okuneva Inc', '2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 6)
+SQL (23.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 29) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 29)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 309) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 6, 29)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 310) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 8, 29)
+SQL (20.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 311) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 3, 29)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 312) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 2, 29)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 313) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 3, 29)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 314) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 9, 29)
+SQL (11.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 315) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 12, 29)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 316) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 5, 29)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 317) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 1, 29)
+SQL (21.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 318) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 9, 29)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 319) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Wiegand LLC', '2010-05-12 04:57:20', '2010-05-12 04:57:20', 11, 6)
+SQL (1.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 30) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 11, 30)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 320) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 30)
+SQL (3.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 321) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 30)
+SQL (27.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 322) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 11, 30)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 323) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 12, 30)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 324) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 7, 30)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 325) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 5, 30)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 326) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 1, 30)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 327) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 2, 30)
+SQL (19.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 328) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 11, 30)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 329) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 10, 30)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 330) 
+SQL (0.0ms)  BEGIN
+Mcontact Create (1.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Tauranga', '58241', '2010-05-12 04:57:20', 17, 1, '16559 Beech Pl', 'quas aspernatur eligendi numquam expedita neque eum rem qui nihil nam aspernatur quos impedit pariatur architecto omnis dolores et', '2010-05-12 04:57:20', 260, 'Rm 285', 22, 'http://anderson.info', 'http://hegmann.us', '011-20-62-4735', '011-92-62-8355', 'vdent@msn.com', 'US.NC', 21, 25)
+SQL (24.0ms)  COMMIT
+Mcontact Load (0.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 7) 
+User Load (0.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (0.0ms)  BEGIN
+Organization Create (1.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('TCS', '2010-05-12 04:57:20', 'Mining', '2010-05-12 04:57:20', 'LCFHFN-W4WO6ECPikcGk', 1, 28, 0, 'IT')
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 7) 
+OrganizationRole Create (0.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 7)
+Mcontact Update (0.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:20' WHERE `id` = 7
+SQL (15.0ms)  COMMIT
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 7) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Halvorson Group', '2010-05-12 04:57:20', '2010-05-12 04:57:20', 7, 7)
+SQL (22.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 31) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 7, 31)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 331) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 8, 31)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 332) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 9, 31)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 333) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 10, 31)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 334) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 8, 31)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 335) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 31)
+SQL (12.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 336) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 7, 31)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 337) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 11, 31)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 338) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 2, 31)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 339) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 8, 31)
+SQL (2.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 340) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 31)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 341) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Raynor Group', '2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 7)
+SQL (17.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 32) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 32)
+SQL (2.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 342) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 4, 32)
+SQL (30.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 343) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 3, 32)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 344) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 3, 32)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 345) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 3, 32)
+SQL (13.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 346) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 12, 32)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 347) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 2, 32)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 348) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 9, 32)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 349) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 11, 32)
+SQL (31.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 350) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 6, 32)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 351) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:20', '2010-05-12 04:57:20', 3, 32)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 352) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Runolfsdottir LLC', '2010-05-12 04:57:20', '2010-05-12 04:57:20', 1, 7)
+SQL (29.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 33) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 1, 33)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 353) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 1, 33)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 354) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 33)
+SQL (28.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 355) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 8, 33)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 356) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 12, 33)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 357) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 33)
+SQL (26.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 358) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 3, 33)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 359) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 33)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 360) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 33)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 361) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 11, 33)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 362) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 33)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 363) 
+SQL (1.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Tillman Inc', '2010-05-12 04:57:21', '2010-05-12 04:57:21', 3, 7)
+SQL (7.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 34) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 3, 34)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 364) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 5, 34)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 365) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 34)
+SQL (22.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 366) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 34)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 367) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (2.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 12, 34)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 368) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 2, 34)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 369) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 11, 34)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 370) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 11, 34)
+SQL (19.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 371) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 7, 34)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 372) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 7, 34)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 373) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 34)
+SQL (25.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 374) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Schmeler-Zemlak', '2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 7)
+SQL (4.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 35) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 35)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 375) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 2, 35)
+SQL (21.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 376) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 2, 35)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 377) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 5, 35)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 378) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 12, 35)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 379) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 7, 35)
+SQL (19.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 380) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 3, 35)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 381) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 35)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 382) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 35)
+SQL (21.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 383) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 7, 35)
+SQL (16.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 384) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 3, 35)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 385) 
+SQL (0.0ms)  BEGIN
+Mcontact Create (1.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Polokwane', '17174', '2010-05-12 04:57:21', 21, 1, '201 Chestnut Rdg', 'nemo quia odit architecto nihil totam unde facilis mollitia ut rerum minima vitae inventore vel enim et neque sapiente deserunt molestias sit labore rerum possimus veritatis dolorum at quia eos dolore vitae minima animi ea ducimus eum non perferendis reprehenderit cumque', '2010-05-12 04:57:21', 554, 'Slip 343', 24, 'http://abbottyost.us', 'http://ratke.us', '011-92-52-9276', '011-60-105-6702', 'ggarcia@msn.com', 'US.OK', 19, 23)
+SQL (22.0ms)  COMMIT
+Mcontact Load (1.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 8) 
+User Load (1.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (0.0ms)  BEGIN
+Organization Create (1.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('Walmart', '2010-05-12 04:57:21', 'Mining', '2010-05-12 04:57:21', 'kto-8tmhQ-N8Z_2ynDBu', 1, 29, 1, 'Mechanical')
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 8) 
+OrganizationRole Create (1.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 8)
+Mcontact Update (1.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:21' WHERE `id` = 8
+SQL (7.0ms)  COMMIT
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 8) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Hettinger LLC', '2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 8)
+SQL (1.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 36) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 36)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 386) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 36)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 387) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 10, 36)
+SQL (2.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 388) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 11, 36)
+SQL (6.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 389) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 11, 36)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 390) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 10, 36)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 391) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 36)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 392) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 10, 36)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 393) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 11, 36)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 394) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 2, 36)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 395) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 9, 36)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 396) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Kassulke-Waters', '2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 8)
+SQL (4.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 37) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 37)
+SQL (27.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 397) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 6, 37)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 398) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 7, 37)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 399) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 12, 37)
+SQL (20.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 400) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:21', '2010-05-12 04:57:21', 12, 37)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 401) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 11, 37)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 402) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 37)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 403) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 11, 37)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 404) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 3, 37)
+SQL (12.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 405) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 2, 37)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 406) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 4, 37)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 407) 
+SQL (1.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Bartell, Stoltenberg and King', '2010-05-12 04:57:22', '2010-05-12 04:57:22', 8, 8)
+SQL (7.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 38) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (2.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 8, 38)
+SQL (21.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 408) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 1, 38)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 409) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 1, 38)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 410) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 3, 38)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 411) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 38)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 412) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 8, 38)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 413) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 10, 38)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 414) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 8, 38)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 415) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 9, 38)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 416) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 6, 38)
+SQL (97.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 417) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 6, 38)
+SQL (26.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 418) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Simonis LLC', '2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 8)
+SQL (3.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 39) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 39)
+SQL (6.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 419) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 6, 39)
+SQL (11.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 420) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 1, 39)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 421) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 7, 39)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 422) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 5, 39)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 423) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 6, 39)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 424) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 39)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 425) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 11, 39)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 426) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 6, 39)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 427) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 5, 39)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 428) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 2, 39)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 429) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Smitham-Greenholt', '2010-05-12 04:57:22', '2010-05-12 04:57:22', 7, 8)
+SQL (6.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 40) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 7, 40)
+SQL (32.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 430) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 1, 40)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 431) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 6, 40)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 432) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 40)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 433) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 40)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 434) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 10, 40)
+SQL (6.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 435) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 3, 40)
+SQL (12.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 436) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 5, 40)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 437) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 11, 40)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 438) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 3, 40)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 439) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 5, 40)
+SQL (32.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 440) 
+SQL (0.0ms)  BEGIN
+Mcontact Create (1.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Goukamma', '32364', '2010-05-12 04:57:22', 17, 1, '20065 Chestnut Rd', 'asperiores in accusantium possimus enim molestias voluptas quis impedit et amet rem reiciendis aliquid debitis vero incidunt aut veritatis quia distinctio quia alias sint optio sint similique optio corrupti quo itaque error non et quia', '2010-05-12 04:57:22', 266, 'Bsmt 992', 23, 'http://kuvalis.uk', 'http://lebsackmurazik.ca', '011-12-25-2635', '011-40-21-10456', 'kbrown@hotmail.com', 'US.VT', 20, 27)
+SQL (2.0ms)  COMMIT
+Mcontact Load (1.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 9) 
+User Load (0.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (1.0ms)  BEGIN
+Organization Create (0.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('Viridian', '2010-05-12 04:57:22', 'Mining', '2010-05-12 04:57:22', 'Ws4bssyoZefcmM89vibS', 1, 29, 1, 'IT')
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 9) 
+OrganizationRole Create (0.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 9)
+Mcontact Update (1.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:22' WHERE `id` = 9
+SQL (16.0ms)  COMMIT
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 9) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Koelpin, Hoeger and Weimann', '2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 9)
+SQL (16.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 41) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 12, 41)
+SQL (32.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 441) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 10, 41)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 442) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 4, 41)
+SQL (6.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 443) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 11, 41)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 444) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 7, 41)
+SQL (22.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 445) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 5, 41)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 446) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 3, 41)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 447) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (2.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:22', '2010-05-12 04:57:22', 1, 41)
+SQL (3.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 448) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 12, 41)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 449) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 12, 41)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 450) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 9, 41)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 451) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Kerluke Group', '2010-05-12 04:57:23', '2010-05-12 04:57:23', 9, 9)
+SQL (3.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 42) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 9, 42)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 452) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 10, 42)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 453) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 3, 42)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 454) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 5, 42)
+SQL (17.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 455) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 3, 42)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 456) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 7, 42)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 457) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 8, 42)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 458) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 8, 42)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 459) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 9, 42)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 460) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 2, 42)
+SQL (19.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 461) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 12, 42)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 462) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Williamson-Morar', '2010-05-12 04:57:23', '2010-05-12 04:57:23', 8, 9)
+SQL (23.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 43) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 8, 43)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 463) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 4, 43)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 464) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 11, 43)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 465) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 1, 43)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 466) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 11, 43)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 467) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 11, 43)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 468) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 5, 43)
+SQL (31.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 469) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 9, 43)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 470) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 2, 43)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 471) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 12, 43)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 472) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 6, 43)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 473) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Tromp, Schroeder and Quitzon', '2010-05-12 04:57:23', '2010-05-12 04:57:23', 11, 9)
+SQL (7.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 44) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 11, 44)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 474) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 11, 44)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 475) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 12, 44)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 476) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 6, 44)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 477) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 9, 44)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 478) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 8, 44)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 479) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 9, 44)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 480) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 9, 44)
+SQL (31.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 481) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 11, 44)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 482) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 7, 44)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 483) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 6, 44)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 484) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('O\'Kon-Bosco', '2010-05-12 04:57:23', '2010-05-12 04:57:23', 8, 9)
+SQL (16.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 45) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 8, 45)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 485) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 11, 45)
+SQL (24.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 486) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 7, 45)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 487) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (2.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 6, 45)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 488) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 3, 45)
+SQL (5.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 489) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 4, 45)
+SQL (27.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 490) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 7, 45)
+SQL (97.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 491) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 5, 45)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 492) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:23', '2010-05-12 04:57:23', 1, 45)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 493) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 10, 45)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 494) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 12, 45)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 495) 
+SQL (0.0ms)  BEGIN
+Mcontact Create (0.0ms)  INSERT INTO `mcontacts` (`city`, `zip`, `created_at`, `telnum2_type`, `is_email_verified`, `street1`, `short_description`, `updated_at`, `country_id`, `street2`, `webpage1_type`, `webpage1`, `webpage2`, `telnum1`, `telnum2`, `email`, `state`, `telnum1_type`, `webpage2_type`) VALUES('Tauranga', '73544', '2010-05-12 04:57:24', 19, 1, '2135 Walnut Ave', 'animi amet est rerum cumque magnam dicta perspiciatis corrupti autem vero quia nihil velit', '2010-05-12 04:57:24', 840, 'Stop 546', 25, 'http://kling.biz', 'http://heaney.info', '011-43-28-8729', '011-9-26-4175', 'zsmythe@privacy.net', 'US.NJ', 19, 24)
+SQL (20.0ms)  COMMIT
+Mcontact Load (1.0ms)  SELECT * FROM `mcontacts` WHERE (`mcontacts`.`id` = 10) 
+User Load (0.0ms)  SELECT * FROM `users` LIMIT 1
+SQL (0.0ms)  BEGIN
+Organization Create (0.0ms)  INSERT INTO `organizations` (`name`, `created_at`, `specific_industry`, `updated_at`, `hashkey`, `owner_user_id`, `status`, `use_ssl`, `industry`) VALUES('eBay', '2010-05-12 04:57:24', 'Search Engine Optimization', '2010-05-12 04:57:24', 'kJPQZsGm09Ursgw388qH', 1, 28, 0, 'BPO')
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 10) 
+OrganizationRole Create (0.0ms)  INSERT INTO `mc_development`.`organization_roles` (`name`, `ext_organization_id`, `reports_to_user_id`, `user_id`, `organization_id`) VALUES('O', NULL, NULL, 1, 10)
+Mcontact Update (0.0ms)  UPDATE `mcontacts` SET `updated_at` = '2010-05-12 04:57:24' WHERE `id` = 10
+SQL (5.0ms)  COMMIT
+Organization Load (0.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` = 10) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Kerluke, Roberts and Kirlin', '2010-05-12 04:57:24', '2010-05-12 04:57:24', 3, 10)
+SQL (21.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 46) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 3, 46)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 496) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 12, 46)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 497) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 5, 46)
+SQL (32.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 498) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 9, 46)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 499) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 9, 46)
+SQL (7.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 500) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 7, 46)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 501) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 46)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 502) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 46)
+SQL (6.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 503) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 4, 46)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 504) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 8, 46)
+SQL (22.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 505) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 3, 46)
+SQL (16.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 506) 
+SQL (0.0ms)  BEGIN
+Team Create (1.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Kuvalis, Brown and Walker', '2010-05-12 04:57:24', '2010-05-12 04:57:24', 1, 10)
+SQL (1.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 47) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 1, 47)
+SQL (24.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 507) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (3.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 47)
+SQL (3.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 508) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 12, 47)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 509) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 47)
+SQL (4.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 510) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 47)
+SQL (22.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 511) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 10, 47)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 512) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 10, 47)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 513) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 10, 47)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 514) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 5, 47)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 515) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 1, 47)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 516) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 11, 47)
+SQL (25.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 517) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Morar Group', '2010-05-12 04:57:24', '2010-05-12 04:57:24', 3, 10)
+SQL (16.0ms)  COMMIT
+Team Load (1.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 48) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 3, 48)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 518) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 3, 48)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 519) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 11, 48)
+SQL (19.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 520) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 10, 48)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 521) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 4, 48)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 522) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 4, 48)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 523) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 48)
+SQL (6.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 524) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 48)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 525) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 1, 48)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 526) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 48)
+SQL (17.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 527) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 8, 48)
+SQL (24.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 528) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Schamberger Inc', '2010-05-12 04:57:24', '2010-05-12 04:57:24', 9, 10)
+SQL (4.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 49) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 9, 49)
+SQL (27.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 529) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 8, 49)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 530) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 6, 49)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 531) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (2.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 9, 49)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 532) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 49)
+SQL (16.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 533) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 4, 49)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 534) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 10, 49)
+SQL (26.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 535) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 49)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 536) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 9, 49)
+SQL (22.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 537) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 2, 49)
+SQL (4.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 538) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 7, 49)
+SQL (28.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 539) 
+SQL (0.0ms)  BEGIN
+Team Create (0.0ms)  INSERT INTO `teams` (`name`, `created_at`, `updated_at`, `owner_user_id`, `organization_id`) VALUES('Klein Inc', '2010-05-12 04:57:24', '2010-05-12 04:57:24', 9, 10)
+SQL (16.0ms)  COMMIT
+Team Load (0.0ms)  SELECT * FROM `teams` WHERE (`teams`.`id` = 50) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 9, 50)
+SQL (1.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 540) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:24', '2010-05-12 04:57:24', 4, 50)
+SQL (25.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 541) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 4, 50)
+SQL (16.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 542) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 9, 50)
+SQL (23.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 543) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 11, 50)
+SQL (1.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 544) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 12, 50)
+SQL (26.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 545) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 2, 50)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 546) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 9, 50)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 547) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 2, 50)
+SQL (23.0ms)  COMMIT
+TeamUser Load (1.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 548) 
+SQL (1.0ms)  BEGIN
+TeamUser Create (1.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 10, 50)
+SQL (5.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 549) 
+SQL (0.0ms)  BEGIN
+TeamUser Create (0.0ms)  INSERT INTO `team_users` (`created_at`, `updated_at`, `user_id`, `team_id`) VALUES('2010-05-12 04:57:25', '2010-05-12 04:57:25', 1, 50)
+SQL (7.0ms)  COMMIT
+TeamUser Load (0.0ms)  SELECT * FROM `team_users` WHERE (`team_users`.`id` = 550) 
