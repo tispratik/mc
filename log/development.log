@@ -408,3 +408,83 @@ User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1)
 Rendered layouts/_header (4.0ms)
 Rendered layouts/_old_browser (0.0ms)
 Completed in 855ms (View: 344, DB: 22) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 127.0.0.1 at 2010-05-11 22:23:48) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (4.0ms)  SHOW FIELDS FROM `users`
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (6.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (1.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (5.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (10.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (5.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (15.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (192.0ms)
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (2.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (4.0ms)  SHOW FIELDS FROM `usrs`
+Rendered layouts/_top_bar (133.0ms)
+Rendered layouts/_logo_box (1.0ms)
+User Load (2.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (9.0ms)
+Rendered layouts/_old_browser (0.0ms)
+Completed in 888ms (View: 320, DB: 31) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-11 22:23:50) [GET]
+Redirected to http://localhost:3000/
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 127.0.0.1 at 2010-05-11 22:23:50) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (4.0ms)  SHOW FIELDS FROM `users`
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (4.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (6.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (1.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (5.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (6.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (4.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (21.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (112.0ms)
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (1.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (5.0ms)  SHOW FIELDS FROM `usrs`
+Rendered layouts/_top_bar (129.0ms)
+Rendered layouts/_logo_box (1.0ms)
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (8.0ms)
+Rendered layouts/_old_browser (0.0ms)
+Completed in 906ms (View: 240, DB: 32) | 200 OK [http://localhost/]
