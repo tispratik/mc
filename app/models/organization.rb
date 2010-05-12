@@ -8,6 +8,8 @@ class Organization < ActiveRecord::Base
   has_many :teams
   has_many :organization_roles
   has_many :users, :through => :organization_roles
+  has_many :assets, :as => :attachable
+  accepts_nested_attributes_for :assets
   alias :roles :organization_roles
   
   def before_validation_on_create

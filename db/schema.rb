@@ -11,6 +11,21 @@
 
 ActiveRecord::Schema.define(:version => 100000000000000) do
 
+  create_table "assets", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.string   "data_file_size"
+    t.string   "orig_name"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "assets", ["attachable_id"], :name => "index_assets_on_attachable_id"
+
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
     t.integer  "attempts",   :default => 0
