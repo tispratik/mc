@@ -488,3 +488,211 @@ User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1)
 Rendered layouts/_header (8.0ms)
 Rendered layouts/_old_browser (0.0ms)
 Completed in 906ms (View: 240, DB: 32) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 127.0.0.1 at 2010-05-11 22:40:42) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (4.0ms)  SHOW FIELDS FROM `users`
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (4.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (1.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (5.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (4.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (4.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (13.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (148.0ms)
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (1.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (4.0ms)  SHOW FIELDS FROM `usrs`
+Rendered layouts/_top_bar (118.0ms)
+Rendered layouts/_logo_box (3.0ms)
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (7.0ms)
+Rendered layouts/_old_browser (3.0ms)
+Completed in 837ms (View: 316, DB: 22) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-11 22:40:44) [GET]
+Redirected to http://localhost:3000/
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 127.0.0.1 at 2010-05-11 22:40:44) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (5.0ms)  SHOW FIELDS FROM `users`
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (5.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (0.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (5.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (4.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (4.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (11.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (169.0ms)
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (1.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (4.0ms)  SHOW FIELDS FROM `usrs`
+Rendered layouts/_top_bar (122.0ms)
+Rendered layouts/_logo_box (1.0ms)
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (4.0ms)
+Rendered layouts/_old_browser (1.0ms)
+Completed in 784ms (View: 294, DB: 21) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing OrganizationsController#show (for 127.0.0.1 at 2010-05-11 22:40:49) [GET]
+  Parameters: {"action"=>"show", "id"=>"eJxj4VCSDE8rcvcqL_A1SUxJinJJ8Q0uDzIGAFDmBzU|2e4f943b62a673175c6d77adc131203e3f2bf2f6", "controller"=>"organizations"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (6.0ms)  SHOW FIELDS FROM `users`
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (4.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (1.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (5.0ms)  SHOW FIELDS FROM `ucontacts`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (4.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (14.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`hashkey` = 'WfrGJwpM4adbZDdMSwR3') LIMIT 1
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.organization_id = 1 AND (`mc_development`.`organization_roles`.`user_id` = 1)) LIMIT 1
+Rendering template within layouts/application
+Rendering organizations/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (3.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Organization Load (1.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (26.0ms)
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (0.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (5.0ms)  SHOW FIELDS FROM `usrs`
+Usr Load (0.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Rendered layouts/_top_bar (4.0ms)
+Rendered layouts/_logo_box (2.0ms)
+Rendered layouts/_header (3.0ms)
+Rendered layouts/_old_browser (0.0ms)
+Completed in 791ms (View: 235, DB: 24) | 200 OK [http://localhost/organizations/eJxj4VCSDE8rcvcqL_A1SUxJinJJ8Q0uDzIGAFDmBzU%7C2e4f943b62a673175c6d77adc131203e3f2bf2f6]
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-11 22:40:50) [GET]
+Redirected to http://localhost:3000/
+SQL (1.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing UsersController#me (for 127.0.0.1 at 2010-05-11 22:40:51) [GET]
+  Parameters: {"action"=>"me", "controller"=>"users"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (5.0ms)  SHOW FIELDS FROM `users`
+User Load (0.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (4.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (1.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (1.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (5.0ms)  SHOW FIELDS FROM `ucontacts`
+Rendering template within layouts/application
+Rendering users/show
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.`user_id` = 1) 
+OrganizationRole Columns (5.0ms)  SHOW FIELDS FROM `mc_development`.`organization_roles`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (4.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (12.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`id` IN (6,7,8,9,1,2,3,10,4,5)) 
+Rendered organizations/_my (169.0ms)
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Usr Load (2.0ms)  SELECT * FROM `usrs` WHERE (`usrs`.user_id = 1) LIMIT 1
+Usr Columns (4.0ms)  SHOW FIELDS FROM `usrs`
+Rendered layouts/_top_bar (124.0ms)
+Rendered layouts/_logo_box (1.0ms)
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = 1) 
+Rendered layouts/_header (5.0ms)
+Rendered layouts/_old_browser (0.0ms)
+Completed in 769ms (View: 296, DB: 23) | 200 OK [http://localhost/]
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+
+
+Processing AssetsController#index (for 127.0.0.1 at 2010-05-11 22:40:54) [GET]
+  Parameters: {"action"=>"index", "controller"=>"assets", "organization_id"=>"eJxj4VCSDE8rcvcqL_A1SUxJinJJ8Q0uDzIGAFDmBzU|2e4f943b62a673175c6d77adc131203e3f2bf2f6"}
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+User Columns (4.0ms)  SHOW FIELDS FROM `users`
+User Load (1.0ms)  SELECT * FROM `users` WHERE (`users`.`id` = '1') LIMIT 1
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (1.0ms)  SET SQL_AUTO_IS_NULL=0
+Decode Load (1.0ms)  SELECT * FROM `decodes` ORDER BY sort_order
+Decode Columns (4.0ms)  SHOW FIELDS FROM `decodes`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'OP_Phone_Type') ORDER BY sort_order
+SQL (0.0ms)  SET NAMES 'utf8'
+SQL (0.0ms)  SET SQL_AUTO_IS_NULL=0
+Ucontact Load (1.0ms)  SELECT * FROM `ucontacts` WHERE (`ucontacts`.user_id = 1) LIMIT 1
+Ucontact Columns (4.0ms)  SHOW FIELDS FROM `ucontacts`
+Decode Load (0.0ms)  SELECT * FROM `decodes` WHERE (`decodes`.`name` = 'MC_Org_Status') ORDER BY sort_order
+Organization Columns (5.0ms)  SHOW FIELDS FROM `organizations`
+Organization Load (12.0ms)  SELECT * FROM `organizations` WHERE (`organizations`.`hashkey` = 'WfrGJwpM4adbZDdMSwR3') LIMIT 1
+OrganizationRole Load (1.0ms)  SELECT * FROM `mc_development`.`organization_roles` WHERE (`mc_development`.`organization_roles`.organization_id = 1 AND (`mc_development`.`organization_roles`.`user_id` = 1)) LIMIT 1
+Asset Columns (0.0ms)  Mysql::Error: Table 'mc_development.assets' doesn't exist: SHOW FIELDS FROM `assets`
+
+ActiveRecord::StatementInvalid (Mysql::Error: Table 'mc_development.assets' doesn't exist: SHOW FIELDS FROM `assets`):
+  app/controllers/assets_controller.rb:10:in `new'
+  app/controllers/assets_controller.rb:10:in `index'
+  haml (2.2.21) [v] lib/sass/plugin/rails.rb:20:in `process'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  C:/rubyonrails/ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+  -e:2:in `load'
+  -e:2
+
+Rendered rescues/_trace (66.0ms)
+Rendered rescues/_request_and_response (3.0ms)
+Rendering rescues/layout (internal_server_error)

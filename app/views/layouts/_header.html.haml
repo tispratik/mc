@@ -7,7 +7,7 @@
     = @organization
   
   .menu
-    - [["Dashboard", "organizations", nil], ["Teams", "teams", :teams],].each do |link_name, link_controller, link_path|
+    - [["Dashboard", "organizations", nil], ["Teams", "teams", :teams], ["Files", "assets", :assets]].each do |link_name, link_controller, link_path|
       = link_to link_name, [@organization, link_path], :class => (controller_name == link_controller) ? "current" : nil
 
 - elsif @user && !@user.new_record?
