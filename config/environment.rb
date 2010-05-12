@@ -11,8 +11,6 @@ Rails::Initializer.run do |config|
 
   config.gem 'haml'
   config.gem 'will_paginate'
-
-
   config.gem 'email_veracity'
   config.gem 'url_store'
   config.gem 'delayed_job'
@@ -28,6 +26,13 @@ require 'paperclip'
 require 'thinking_sphinx/deltas/delayed_delta'
 
 UrlStore.defaults = {:secret => '55sfsasfjhjhj'}
+
+# hack for using Time.zone.now instead of Time.now
+class Date
+  def self.today
+    current
+  end
+end
 
 ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS[:default] = "%B %d, %Y %H:%M"
 ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default] = '%Y-%m-%d'

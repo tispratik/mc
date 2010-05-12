@@ -41,4 +41,9 @@ class User < ActiveRecord::Base
     # )
     OrganizationRole.all(:conditions => {:user_id => id}, :include => :organization)
   end
+  
+  def self.cid
+    curr_user.id
+  end
+  
 end

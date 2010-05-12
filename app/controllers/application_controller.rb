@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   include Authentication
   include GuiHelpers
   include RoutingErrors
-  #include ExceptionNotifiable
+  include ExceptionNotifiable
+  
+  layout proc{ |c| c.request.xhr? ? false : "application" }
   
   helper :all
   protect_from_forgery

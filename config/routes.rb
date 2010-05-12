@@ -19,10 +19,10 @@ ActionController::Routing::Routes.draw do |map|
     o.resources :mcontacts
     o.resources :accesses
     o.resources :organization_roles, :as => :roles
+    o.resources :assets
+    o.connect '/assets/:id/:style', :controller => 'assets', :action => 'show', :conditions => {:method => :get}
   end
   
-  map.resources :assets, :only => [:destroy]
-  map.connect '/assets/:id/:style', :controller => 'assets', :action => 'show', :conditions => {:method => :get}
   map.connect "live_validations/:action", :controller => "live_validations"
   map.resources :comments, :member => {:quote => :get}
   map.root :controller => :users, :action => :me
