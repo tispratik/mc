@@ -35,10 +35,6 @@ class User < ActiveRecord::Base
   end
   
   def my_organizations_with_roles
-    # Organization.all(:joins => "left join organization_invitations on organization_invitations.organization_id=organization.id",
-    #   :conditions => ["organizations.user_id = ? or (organization_invitations.user_id = ? and organization_invitations.confirmed=1)", id, id],
-    #   :group => "organizations.id"
-    # )
     OrganizationRole.all(:conditions => {:user_id => id}, :include => :organization)
   end
   
